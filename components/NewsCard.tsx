@@ -26,8 +26,6 @@ const NewCard = ({news} : NewsProps) => {
 
   const formatedDate = dayjs(published).format('DD/MM/YYYY HH:mm')
 
-  const [isOpen, setisOpen] = useState(false)
-
   return (
 
     <Link href={`article/${id}`}>
@@ -75,7 +73,7 @@ const NewCard = ({news} : NewsProps) => {
         <div className="flex w-full justify-between text-gray-800">
           <div className="flex justify-center items-center gap-14">
             {tags.map((tag, index) => (
-              <p className='hover:text-green-600 text-blue-400' key={`${id}-${tag}-${index}`}>
+              <p className='mt-6 flex flex-row bg-slate-400 p-[10px] rounded-md hover:bg-emerald-500 hover:text-white' key={`${id}-${tag}-${index}`}>
                 <span className='self-start text-[12px]'>
                   {tag}
                 </span>
@@ -84,11 +82,8 @@ const NewCard = ({news} : NewsProps) => {
           </div>
         </div>
       </div>
-
-      <NewsDetails isOpen={isOpen} closeModal={() => setisOpen(false)} news={news} />
-
       </div>
-      
+
     </Link>
     
   )
