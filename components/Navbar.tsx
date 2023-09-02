@@ -1,8 +1,15 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { CustomButton } from ".";
+import { UI, useUiState } from '@/context/UIStateContext';
+import { auth } from "@/utils/firebase/auth";
 
 const Navbar = () => {
+
+
+  const { uiState, setUiState } = useUiState();
+
   return (
     <header className="w-full absolute z-10">
 
@@ -13,11 +20,20 @@ const Navbar = () => {
                         className="object-contain"/>
             </Link>
 
-            <CustomButton 
-                title="SignIn" 
-                btnType="button"
-                containerStyles="text-primary-blue rounded-full bg-white min-w-[130px]"
-            />
+            <Link href='/sign' >
+              {
+                (uiState === UI.SignIn || uiState === UI.SignUp || auth.currentUser) ? (
+                  <></>
+                ) : (   
+                  <CustomButton 
+                    title="SignIn" 
+                    btnType="button"
+                    containerStyles="text-primary-blue rounded-full bg-white min-w-[130px]"
+                  />
+                ) 
+              }
+              
+            </Link>
         </nav>
 
     </header>

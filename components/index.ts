@@ -6,6 +6,7 @@ import SearchBar from './SearchBar'
 import CustomFilter from './CustomFilter'
 import NewsCard from './NewsCard'
 import NewsDetails from './NewsDetails'
+import CommentSection from './CommentSection'
 
 export {
     Hero,
@@ -15,5 +16,6 @@ export {
     SearchBar,
     CustomFilter,
     NewsCard,
-    NewsDetails
+    NewsDetails,
+    CommentSection
 }

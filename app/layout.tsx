@@ -1,6 +1,7 @@
 import { Footer, Navbar } from '@/components'
 import './globals.css'
 import type { Metadata } from 'next'
+import { UiStateProvider } from '@/context/UIStateContext'
 
 export const metadata: Metadata = {
   title: 'FakeNews!',
@@ -13,11 +14,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    
     <html lang="ptbr">
       <body className="relative">
-        <Navbar/>
+      
+        <UiStateProvider>
         {children}
-        <Footer/>
+        </UiStateProvider>
+        
+    
       </body>
     </html>
   )

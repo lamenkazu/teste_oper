@@ -1,23 +1,56 @@
 "use client";
-import { CustomFilter, Hero, NewsCard, SearchBar } from '@/components'
+import { CustomFilter, Footer, Hero, Navbar, NewsCard, SearchBar } from '@/components'
+import { UI, useUiState } from '@/context/UIStateContext';
 import { fetchNews } from '@/utils'
 import Image from 'next/image'
+import { useEffect, useState } from 'react';
+import { UiStateProvider } from '@/context/UIStateContext'
 
-export default async function Home() {
 
-  const allNews = await fetchNews()
+export default function Home() {
 
-  let someNews = []
+  const { uiState, setUiState } = useUiState();
 
-  for(let i = 0; i < 10; i++){
-    someNews.push(allNews[i])
-  }
+  const [isDataEmpty, setisDataEmpty] = useState(false)
 
-  //Verificações de possíveis erro nos dados
-  const isDataEmpty = !Array.isArray(allNews) || allNews.length < 1 || !allNews; 
+  const [someNews, setsomeNews] = useState([])
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const allNews = await fetchNews();
+
+        const newsSlice = allNews.slice(0, 10);
+
+
+        //Verificações de possíveis erro nos dados
+        setisDataEmpty(!Array.isArray(allNews) || allNews.length < 1 || !allNews) 
+        
+        setsomeNews(newsSlice);
+
+
+        setUiState(UI.Home);
+
+        console.log(uiState)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [setUiState]);
+
+  
+
+ 
+
+  setUiState(UI.Home)
 
   return (
-    <main className="overflow-hidden">
+    <>
+      <Navbar/>
+      <main className="overflow-hidden">
       <Hero/>
 
 
@@ -62,5 +95,11 @@ export default async function Home() {
       </div>
 
     </main>
+
+    <Footer/>
+
+
+    </>
+    
   )
 }

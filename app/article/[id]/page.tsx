@@ -3,6 +3,9 @@
 import { fetchArticle } from "@/utils"
 import Image from "next/image"
 import dayjs from 'dayjs'
+import { CommentSection, Navbar, Footer } from "@/components"
+import { useEffect, useState } from "react"
+import { UI, useUiState } from '@/context/UIStateContext';
 
 interface ParamProps{
   params:{
@@ -20,14 +23,37 @@ interface ArticleData{
   tags: string[]
 }
 
-export default async function Article({params}:ParamProps){
+export default function Article({params}:ParamProps){
 
-  const article: ArticleData = await fetchArticle(params.id)
+  const { uiState, setUiState } = useUiState();
 
-  const formatedDate = dayjs(article.published).format('DD/MM/YYYY HH:mm')
+  const [formatedDate, setformatedDate] = useState('')
 
+  const [article, setArticle] = useState<ArticleData>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        setUiState(UI.Article)
+        setArticle(await fetchArticle(params.id))
+        setformatedDate(dayjs(article?.published).format('DD/MM/YYYY HH:mm'))
+
+
+
+      }catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData()
+    
+  }, [setUiState])
+
+  console.log(uiState)
 
     return(
+      <>
+      <Navbar/>
       <main className="overflow-hidden">
 
         <div id="discover" className="mt-36 padding-x padding-y max-width">
@@ -35,15 +61,19 @@ export default async function Article({params}:ParamProps){
         <div className="flex justify-center items-center">
           <div className="home__text-container">
             <h1 className="text-4xl font-extrabold">
-              {article.title}
+              {article?.title}
             </h1>
           </div>
         </div>
 
           <div className="flex justify-center items-center">
             <div className="relative w-[600px] h-96 my-3">
-              <Image src={article.coverImage} alt='News Cover Image' 
-                    fill className=" rounded-3xl object-fill" />
+              {
+                article && 
+                <Image src={article?.coverImage} alt='News Cover Image' 
+                  fill className=" rounded-3xl object-fill" />
+              }
+              
             </div>
           </div>
           
@@ -51,7 +81,7 @@ export default async function Article({params}:ParamProps){
             {/* Author Name*/}
             <p className='flex mt-6 text-[32px] font-extrabold'>
               <span className='self-start text-[14px] font-semibold'>
-                {article.author} 
+                {article?.author} 
               </span>
               <span className='mt-1 ml-3 text-[12px] font-extralight'>
               {formatedDate}
@@ -61,14 +91,14 @@ export default async function Article({params}:ParamProps){
           </div>
 
           <p className='flex mt-6 '>
-              {article.content}
+              {article?.content}
             </p>
 
 
           <div className="flex justify-center items-center gap-14">
           {
-            article.tags.map((tag) => (
-              <p className="mt-6 flex flex-row bg-slate-400 p-1 rounded-sm hover:bg-emerald-500 hover:text-white">
+            article?.tags.map((tag) => (
+              <p key={tag} className="mt-6 flex flex-row bg-slate-400 p-1 rounded-sm hover:bg-emerald-500 hover:text-white">
                 {tag}
               </p>
             ))
@@ -78,8 +108,12 @@ export default async function Article({params}:ParamProps){
 
         </div>
 
-        <CommentSection/>
+        <CommentSection />
 
-      </main> 
+        </main> 
+
+        <Footer/>
+      </>
+      
     )
 }

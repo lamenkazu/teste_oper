@@ -1,0 +1,104 @@
+"use client";
+
+import { CustomButton, Navbar, Footer } from '@/components';
+import {useRef} from 'react'
+import Link from 'next/link';
+
+import { useEffect, useState } from "react"
+import { UI, useUiState } from '@/context/UIStateContext';
+import { auth, logOut, signUp } from '@/utils/firebase/auth';
+import { useRouter } from 'next/navigation';
+
+
+export default function SignUp(){
+
+    const { uiState, setUiState } = useUiState();
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPass, setConfirmPass] = useState("")
+
+    const router = useRouter();
+
+    useEffect(() => {
+        setUiState(UI.SignUp)
+
+    }, [setUiState])
+
+    useEffect(() => {
+        const checkAuthState = () => {
+            auth.onAuthStateChanged((user) => {
+                if(user){
+                    router.push('/')
+                }
+        })
+    }
+
+    checkAuthState();
+
+        
+    }, [router])
+    
+
+    return(
+
+        <>
+        <Navbar/>
+        <main className="overflow-hidden">
+
+        <div className="flex justify-center items-center">
+
+            <div className='news-card mt-32 mb-10 w-[400px]'>
+                
+            <form onSubmit={() => {}}>
+                <h4 className='mb-3'>Sign Up</h4>
+                <input 
+                    className='w-full p-3 rounded-md bg-opacity-20 border-2 border-primary-variant resize-none' 
+                    type="email" name='email' placeholder='Email' required 
+                    onChange={(e) => {setEmail(e.target.value)}}
+                    />
+                <input 
+                    className='w-full mt-3 p-3 rounded-md bg-opacity-20 border-2 border-primary-variant resize-none'
+                    type="password" name='password' placeholder='Senha' required 
+                    onChange={(e) => {setPassword(e.target.value)}}
+                    />
+                <input 
+                    className='w-full mt-3 p-3 rounded-md bg-opacity-20 border-2 border-primary-variant resize-none' 
+                    type="password" name='password' placeholder='Confirmar Senha' required 
+                    onChange={(e) => {setConfirmPass(e.target.value)}}
+                    />
+
+                <div className="flex justify-center items-center">
+                    <CustomButton 
+                        title={'Sign Up'}
+                        btnType="submit"
+                        containerStyles="mt-3 text-white rounded-full bg-primary-blue min-w-[130px]"
+                        handleClick={() => {
+                            if(password === confirmPass){
+                                signUp({email, password})
+                            }else{
+                                alert('Senhas não coincidem, cadastro não efetuado.')
+                            }
+                        }}
+                    />
+                </div>
+
+
+            </form>
+                
+            </div>
+
+        </div>
+
+
+
+        </main>
+        <Footer/>
+        </>
+        
+    )
+}
+
+function setAuth(arg0: {}) {
+    throw new Error('Function not implemented.');
+}
