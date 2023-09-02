@@ -6,6 +6,8 @@ import dayjs from 'dayjs'
 import { CommentSection, Navbar, Footer } from "@/components"
 import { useEffect, useState } from "react"
 import { UI, useUiState } from '@/context/UIStateContext';
+import { auth } from "@/utils/firebase/auth"
+import { useFirebaseAuth } from "@/context/authContext"
 
 interface ParamProps{
   params:{
@@ -31,6 +33,10 @@ export default function Article({params}:ParamProps){
 
   const [article, setArticle] = useState<ArticleData>()
 
+  const user = useFirebaseAuth();
+  
+  console.log(user?.email)
+
   useEffect(() => {
     const fetchData = async () => {
       try{
@@ -38,7 +44,7 @@ export default function Article({params}:ParamProps){
         setArticle(await fetchArticle(params.id))
         setformatedDate(dayjs(article?.published).format('DD/MM/YYYY HH:mm'))
 
-
+        console.log(auth.currentUser)
 
       }catch (error) {
         console.error(error);

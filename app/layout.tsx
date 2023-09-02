@@ -1,7 +1,7 @@
-import { Footer, Navbar } from '@/components'
 import './globals.css'
 import type { Metadata } from 'next'
 import { UiStateProvider } from '@/context/UIStateContext'
+import { FirebaseAuthProvider } from './../context/authContext';
 
 export const metadata: Metadata = {
   title: 'FakeNews!',
@@ -18,9 +18,12 @@ export default function RootLayout({
     <html lang="ptbr">
       <body className="relative">
       
+        <FirebaseAuthProvider>
+
         <UiStateProvider>
         {children}
         </UiStateProvider>
+        </FirebaseAuthProvider>
         
     
       </body>

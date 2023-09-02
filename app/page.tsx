@@ -4,17 +4,21 @@ import { UI, useUiState } from '@/context/UIStateContext';
 import { fetchNews } from '@/utils'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
-import { UiStateProvider } from '@/context/UIStateContext'
+import { useFirebaseAuth } from '@/context/authContext';
 
 
 export default function Home() {
 
   const { uiState, setUiState } = useUiState();
 
+  const user = useFirebaseAuth();
+
+  console.log(user?.email)
+
   const [isDataEmpty, setisDataEmpty] = useState(false)
 
   const [someNews, setsomeNews] = useState([])
-
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,9 +27,10 @@ export default function Home() {
 
         const newsSlice = allNews.slice(0, 10);
 
+        const dataEmpty = !Array.isArray(allNews) || allNews.length < 1 || !allNews
 
         //Verificações de possíveis erro nos dados
-        setisDataEmpty(!Array.isArray(allNews) || allNews.length < 1 || !allNews) 
+        setisDataEmpty(dataEmpty) 
         
         setsomeNews(newsSlice);
 
@@ -39,13 +44,9 @@ export default function Home() {
     };
 
     fetchData();
-  }, [setUiState]);
 
-  
+  }, [setUiState]); 
 
- 
-
-  setUiState(UI.Home)
 
   return (
     <>
