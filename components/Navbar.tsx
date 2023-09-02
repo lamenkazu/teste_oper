@@ -3,10 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { CustomButton } from ".";
 import { UI, useUiState } from '@/context/UIStateContext';
-import { auth } from "@/utils/firebase/auth";
+import { logOut } from "@/utils/firebase/auth";
+
+import {getAuth} from 'firebase/auth'
+import { useFirebaseAuth} from "@/context/authContext";
 
 const Navbar = () => {
 
+  const user = useFirebaseAuth()
 
   const { uiState, setUiState } = useUiState();
 
@@ -20,20 +24,33 @@ const Navbar = () => {
                         className="object-contain"/>
             </Link>
 
-            <Link href='/sign' >
-              {
-                (uiState === UI.SignIn || uiState === UI.SignUp || auth.currentUser) ? (
-                  <></>
-                ) : (   
-                  <CustomButton 
-                    title="SignIn" 
+            
+            {(() => {
+              if (uiState === UI.SignIn || uiState === UI.SignUp ) {
+                return <></>; // Não renderiza nada
+              } else if(!user){
+                return (
+                  <Link href='/sign' >
+                    <CustomButton
+                      title="SignIn"
+                      btnType="button"
+                      containerStyles="text-primary-blue rounded-full bg-white min-w-[130px]"
+                    />
+                  </Link>
+                );
+              }else if(user){
+                return (
+                  <CustomButton
+                    title="SignOut"
                     btnType="button"
                     containerStyles="text-primary-blue rounded-full bg-white min-w-[130px]"
+                    handleClick={() => {logOut()}}
                   />
-                ) 
+                );
               }
+            })()}
               
-            </Link>
+            
         </nav>
 
     </header>
