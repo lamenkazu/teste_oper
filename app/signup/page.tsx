@@ -22,9 +22,8 @@ export default function SignUp() {
 
   const router = useRouter();
 
-  const handleSignUp = () => {
-    event.preventDefault(); //Sem solução encontrada para event deprecated
-
+  const handleSignUp = (e: any) => {
+    e.preventDefault(); 
     if (password === confirmPass) {
       signUp({ email, password }); //Faz a chamada para o o SignUp no Firebase enviando email e senha
 

@@ -20,9 +20,8 @@ export default function Sign() {
     setUiState(UI.SignIn); //Se estiver nessa pagina define o UIState para SignIn
   }, [uiState]);
 
-  const handleSignIn = () => {
-    //Event deprecated, mas o Sign não funciona sem :( Não encontrei solução funcional.
-    event.preventDefault();
+  const handleSignIn = (e: any) => {
+    e.preventDefault();
 
     signIn({ email, password }); //Faz a chamada para o SignIn no Firebase enviando email e senha
 
