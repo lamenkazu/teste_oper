@@ -9,6 +9,8 @@ import NewsDetails from './NewsDetails'
 import CommentSection from './CommentSection'
 import SendComment from './SendComment'
 import Comment from './Comment'
+import SendAnswer from './SendAnswer'
+import AnswerSection from './AnswerSection'
 
 export {
     Hero,
@@ -21,5 +23,7 @@ export {
     NewsDetails,
     CommentSection,
     SendComment,
-    Comment
+    Comment,
+    SendAnswer,
+    AnswerSection
 }

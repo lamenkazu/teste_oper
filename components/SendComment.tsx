@@ -3,21 +3,23 @@ import { CustomButton } from '.'
 import { useFirebaseAuth } from '@/context/authContext'
 import { addComment } from '@/utils/firebase/firestore'
 import dayjs from 'dayjs'
+import { NewAnsType } from './SendAnswer'
 
 
-interface NewCommentType{
+export interface NewCommentType{
     email: string | null, 
     comment: string,
     postId: string,
     createdAt: string,
     likes: string[],
+    answers: NewAnsType[],
 }
 
 interface PostIdProps {
   postId: string;
 }
 
-const SendComment = ({ postId, hasTitle }: PostIdProps & { hasTitle?: boolean }) => {
+const SendComment = ({ postId }: PostIdProps) => {
 
     const [comment, setComment] = useState("")
 
@@ -31,8 +33,9 @@ const SendComment = ({ postId, hasTitle }: PostIdProps & { hasTitle?: boolean })
                     email: user.email,
                     comment: comment,
                     postId: postId,
-                    createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+                    createdAt: dayjs().format('DD-MM-YYYY HH:mm:ss'),
                     likes: [],
+                    answers: []
                 };
 
                 console.log(commentData)
@@ -55,16 +58,13 @@ const SendComment = ({ postId, hasTitle }: PostIdProps & { hasTitle?: boolean })
   return (
     <div id="discover" className="mt-12 padding-x padding-y max-width">
 
-        {
-            hasTitle === true ? (
-                <div className="home__text-container">
-                    <h1 className="text-4xl font-extrabold">
-                        Comentários
-                    </h1>
-                </div>
-            ) : (<></>)
-        }
-        
+
+        <div className="home__text-container">
+            <h1 className="text-4xl font-extrabold">
+                Comentários
+            </h1>
+        </div>
+    
 
         <div className="flex justify-center items-center mt-8">
             <input 

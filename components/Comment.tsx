@@ -3,7 +3,7 @@ import { CommentWithId } from './CommentSection'
 import { useEffect, useState } from 'react'
 import { useFirebaseAuth } from '@/context/authContext';
 import { updateComment } from '@/utils/firebase/firestore';
-import { SendComment } from '.'
+import { SendAnswer, AnswerSection } from '.'
 
 
 
@@ -114,11 +114,17 @@ const Comment = ({ comment }: { comment: CommentWithId }) => {
 
         {
           showAnswer === true ? (
-            <SendComment postId={comment.postId} hasTitle={false}/>
+            <SendAnswer comment={comment}/>
           ) : (
             <></>
           )
           
+        }
+
+        {
+          comment.answers.map((ans, index) => (
+            <AnswerSection key={index} answer={ans}/>
+          ))
         }
 
       </div>

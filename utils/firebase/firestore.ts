@@ -1,18 +1,13 @@
-import {addDoc, collection, getFirestore, doc, query, getDocs, where, QuerySnapshot, onSnapshot, updateDoc} from 'firebase/firestore'
+import {addDoc, collection, getFirestore, doc, getDoc, getDocs, where, QuerySnapshot, onSnapshot, updateDoc} from 'firebase/firestore'
 import { app } from './firebase'
 import { useFirebaseAuth } from '@/context/authContext'
 import { getAuth } from 'firebase/auth'
 import { useState } from 'react'
+import { NewAnsType } from '@/components/SendAnswer'
+import { NewCommentType } from '@/components/CommentSection'
+import { AnswerWithId } from '@/components/AnswerSection'
 
 const firestoreDb = getFirestore(app)
-
-interface NewCommentType{
-    email: string | null, 
-  comment: string,
-  postId: string,
-  createdAt: string,
-  likes: string[],
-}
 
 interface CommentWithId extends NewCommentType {
     id: string;
@@ -36,8 +31,39 @@ const updateComment = async (newComment: CommentWithId) => {
 
 }
 
+const updateAnswer = async(answer: AnswerWithId) => {
+
+    const commentRef = doc(firestoreDb, `post/${answer.postId}/comments/${answer.commentId}`)
+
+    const snapshot = await getDoc(commentRef);
+
+    if(snapshot.exists()){
+        const commentData = snapshot.data();
+
+        const updatedAnswers = [...commentData.answers]
+        
+        updatedAnswers.map(ans => {
+            if(ans.id === answer.id){
+                ans.likes = answer.likes
+            }
+        })
+
+        console.log(updatedAnswers)
+
+        await updateDoc(commentRef, {
+            answers: updatedAnswers,
+        })
+        
+        
+
+    }
+
+}
+
+
 export{
     firestoreDb,
     addComment,
-    updateComment
+    updateComment,
+    updateAnswer
 }

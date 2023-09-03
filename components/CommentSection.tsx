@@ -3,6 +3,8 @@ import { SendComment } from '.'
 import { firestoreDb } from '@/utils/firebase/firestore';
 import {collection,  query, onSnapshot} from 'firebase/firestore'
 import { Comment } from '@/components'
+import { NewAnsType } from './SendAnswer';
+import { AnswerWithId } from './AnswerSection';
 
 
 interface PostIdProps {
@@ -15,6 +17,7 @@ export interface NewCommentType{
   postId: string,
   createdAt: string,
   likes: string[],
+  answers: AnswerWithId[],
 }
 
 export interface CommentWithId extends NewCommentType {
