@@ -14,4 +14,4 @@ Então abra no browser [http://localhost:3000](http://localhost:3000) para ver o
 
 ## About
 
-![Alt text](image.png)
+![Alt text](/teste_oper/public/image.png)
