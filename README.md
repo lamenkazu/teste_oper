@@ -37,7 +37,7 @@ Todos os requisitos cumpridos:
 - Não consegui utilizar o GitHubPages corretamente com o NextJs
 - Falhas de responsividade no código nos comentários e na disponibilização de notícias na Home.
 - API Keys do Firebase Publicas
-- As tipagens do typescript (Com Type ou Interface) deveriam ter ficadas em um único local e ser exportadas para onde fossem necessárias, porém elas estão nos arquivos que foram criadas pela primeira vez, tornando o código menos claro. Isso foi aplicado para outras coisas no código, mas isso é uma coisa que poderia ter sido melhor implementada.
+- As tipagens do typescript (Com Type ou Interface) deveriam ter sido alocadas em um único local e ser exportadas para onde fossem necessárias, porém elas estão nos arquivos que foram criadas pela primeira vez, tornando o código menos claro. Isso foi aplicado para outras coisas no código, mas isso é uma coisa que poderia ter sido melhor implementada.
 
 # Visualização Geral
 
@@ -58,6 +58,8 @@ Todos os requisitos cumpridos:
 ![image](https://github.com/lamenkazu/teste_oper/assets/23318318/a552eaae-7325-4ece-ab65-3d1aedf1cd28)
 
 ![image](https://github.com/lamenkazu/teste_oper/assets/23318318/e2c54303-c9f9-4e39-9f64-8feef8d03f44)
+
+neste ultimo caso, uma conta está logada e ela pode ver quais comentários ela deu Like.
 
 
 
