@@ -7,6 +7,7 @@ import { NewAnsType } from './SendAnswer'
 
 
 export interface NewCommentType{
+    id?: string,
     email: string | null, 
     comment: string,
     postId: string,

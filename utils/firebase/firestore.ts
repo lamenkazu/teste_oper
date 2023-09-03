@@ -9,9 +9,6 @@ import { AnswerWithId } from '@/components/AnswerSection'
 
 const firestoreDb = getFirestore(app)
 
-interface CommentWithId extends NewCommentType {
-    id: string;
-  }
 
 const addComment = async (newComment: NewCommentType) => {
 
@@ -21,7 +18,7 @@ const addComment = async (newComment: NewCommentType) => {
     
 }
 
-const updateComment = async (newComment: CommentWithId) => {
+const updateComment = async (newComment: NewCommentType) => {
 
     const commentRef = doc(firestoreDb, `post/${newComment.postId}/comments/${newComment.id}`)
 
@@ -40,22 +37,18 @@ const updateAnswer = async(answer: AnswerWithId) => {
     if(snapshot.exists()){
         const commentData = snapshot.data();
 
-        const updatedAnswers = [...commentData.answers]
+        const updatedAnswers = [...commentData.answers] //cria cópia das respostas de um comentário
         
         updatedAnswers.map(ans => {
             if(ans.id === answer.id){
-                ans.likes = answer.likes
+                ans.likes = answer.likes //atualiza os likes de uma resposta à um comentário
             }
         })
-
-        console.log(updatedAnswers)
 
         await updateDoc(commentRef, {
             answers: updatedAnswers,
         })
         
-        
-
     }
 
 }

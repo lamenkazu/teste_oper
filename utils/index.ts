@@ -1,4 +1,7 @@
 "use client"
+
+//Arquivo de conexão com a News API
+
 export async function fetchNews(){
     const data = await fetch('https://news-api.lublot.dev/api/posts')
 

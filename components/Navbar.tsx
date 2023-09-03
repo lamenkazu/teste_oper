@@ -5,14 +5,13 @@ import { CustomButton } from ".";
 import { UI, useUiState } from '@/context/UIStateContext';
 import { logOut } from "@/utils/firebase/auth";
 
-import {getAuth} from 'firebase/auth'
 import { useFirebaseAuth} from "@/context/authContext";
 
 const Navbar = () => {
 
   const user = useFirebaseAuth()
 
-  const { uiState, setUiState } = useUiState();
+  const { uiState } = useUiState();
 
   return (
     <header className="w-full absolute z-10">
@@ -27,9 +26,10 @@ const Navbar = () => {
             
             {(() => {
               if (uiState === UI.SignIn || uiState === UI.SignUp ) {
-                return <></>; // Não renderiza nada
+                return <></>; // Não renderiza nada caso esteja em uma dessas paginas
+
               } else if(!user){
-                return (
+                return ( //Renderiza Botão de SignIn caso não tenha usuário logado
                   <Link href='/sign' >
                     <CustomButton
                       title="SignIn"
@@ -38,8 +38,9 @@ const Navbar = () => {
                     />
                   </Link>
                 );
-              }else if(user){
-                return (
+
+              }else {
+                return ( //Renderiza Botão de SignOut caso tenha um usuário logado
                   <CustomButton
                     title="SignOut"
                     btnType="button"

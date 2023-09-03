@@ -1,44 +1,40 @@
-"use client"
+"use client";
 import { useState, createContext, useContext, ReactNode } from "react";
 
 export enum UI {
-    Home,
-    Article,
-    SignIn,
-    SignUp
+  Home,
+  Article,
+  SignIn,
+  SignUp,
 }
 
 type UiStateContextType = {
-    uiState: UI;
-    setUiState: (uiState: UI) => void;
-}
+  uiState: UI;
+  setUiState: (uiState: UI) => void;
+};
 
 type UiStateProviderProps = {
-    children: ReactNode;
-}
+  children: ReactNode;
+};
 
 const UiStateContext = createContext<UiStateContextType | undefined>(undefined);
 
-export function UiStateProvider({ children }: UiStateProviderProps){
+export function UiStateProvider({ children }: UiStateProviderProps) {
+  const [uiState, setUiState] = useState<UI>(UI.Home);
 
-    const [uiState, setUiState] = useState<UI>(UI.Home)
-
-    return(
-        <UiStateContext.Provider value ={{uiState, setUiState}}>
-            {children}
-        </UiStateContext.Provider>
-    )
+  return (
+    <UiStateContext.Provider value={{ uiState, setUiState }}>
+      {children}
+    </UiStateContext.Provider>
+  );
 }
 
-export function useUiState(){
-    const context = useContext(UiStateContext)
+export function useUiState() {
+  const context = useContext(UiStateContext);
 
-    if(context === undefined){
-        throw new Error("useUiState deve ser usado com um UiStateProvider");
+  if (context === undefined) {
+    throw new Error("useUiState deve ser usado com um UiStateProvider");
+  }
 
-    }
-
-    return context
+  return context;
 }
-
-

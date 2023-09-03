@@ -17,15 +17,12 @@ export default function RootLayout({
     
     <html lang="ptbr">
       <body className="relative">
-      
         <FirebaseAuthProvider>
-
-        <UiStateProvider>
-        {children}
-        </UiStateProvider>
+          <UiStateProvider>
+            {children}
+          </UiStateProvider>
         </FirebaseAuthProvider>
         
-    
       </body>
     </html>
   )
