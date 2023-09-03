@@ -39,6 +39,14 @@ Todos os requisitos cumpridos:
 - API Keys do Firebase Publicas
 - As tipagens do typescript (Com Type ou Interface) deveriam ter sido alocadas em um único local e ser exportadas para onde fossem necessárias, porém elas estão nos arquivos que foram criadas pela primeira vez, tornando o código menos claro. Isso foi aplicado para outras coisas no código, mas isso é uma coisa que poderia ter sido melhor implementada.
 
+# Melhorias Possíveis/Futuras
+Estas são melhorias que, dado o tempo, não foram implementadas, mas foram pensadas. (Infelizmente Segunda Feira não tenho tempo para fazer, então não vou tentar sobrecarregar e enviar coisas incompletas, apenas aperfeiçoar o que já foi feito.)
+- Adicionar opção para Excluir comentário
+- Adicionar Recuperação de senha para usuários.
+- Organização da Home:
+  - Listar todas as notícias de modo que aproximadamente 12 delas sejam exibidas de uma vez, com opção de passar para as próximas.
+  - Adicionar Filtros para ordenação das notícias, como Exibir por data, etc.
+
 # Visualização Geral
 
 ![image](https://github.com/lamenkazu/teste_oper/assets/23318318/6a400dcc-9878-472c-840a-df13e32dd7e3)
