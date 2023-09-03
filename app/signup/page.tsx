@@ -1,8 +1,6 @@
 "use client";
 
 import { CustomButton, Navbar, Footer } from "@/components";
-import { useRef } from "react";
-import Link from "next/link";
 
 import { useEffect, useState } from "react";
 import { UI, useUiState } from "@/context/UIStateContext";
