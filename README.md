@@ -15,11 +15,12 @@ Então abra no browser [http://localhost:3000](http://localhost:3000) para ver o
 # Fluxo do usuário
 Este é um miniblog de Fake News.
 Há 4 paginas: Home, Article, SignIn, SignUp
-- Home: Lista algumas infos pegas da News API, quando clica em um artigo é redirecionado para a pagina do artigo.
-- Article: Informações completas dos artigos com lista de comentários e opção para comentar caso tenha um cadastro.
 - SignIn: Loga um usuário já existente
 - SignUp: Cadastra um novo usuário no Miniblog para que possa comentar e curtir comentários.
 - Header: Header distribuido entre todas as paginas possui a Logo do site que leva de volta para a Home e um botão reativo, que caso esteja logado, mostra SignOut para sair da conta, e SignIn, caso não tenha usuário logado. Além não ser exibido nas paginas SignIn e SignUp, as quais só podem ser acessadas caso não tenha um usuário logado.
+- Home: Lista algumas infos pegas da News API, quando clica em um artigo é redirecionado para a pagina do artigo.
+- Article: Informações completas dos artigos com lista de comentários e opção para comentar caso tenha um cadastro.
+- Comentarios: Cada comentário possui uma lista de respostas; isso foi feito intencionalmente, mas poderia ser possível realizar respostas de respostas se uma Resposta de comentário fosse do mesmo tipo que um Comentário, porém foi uma decisão de projeto não aninhar os comnetários dessa forma.
 
 
 # Pros
@@ -41,7 +42,8 @@ Todos os requisitos cumpridos:
 
 # Melhorias Possíveis/Futuras
 Estas são melhorias que, dado o tempo, não foram implementadas, mas foram pensadas. (Infelizmente Segunda Feira não tenho tempo para fazer, então não vou tentar sobrecarregar e enviar coisas incompletas, apenas aperfeiçoar o que já foi feito.)
-- Adicionar opção para Excluir comentário
+- A implementação de Testes foi pensada, porém outras coisas foram priorizadas para serem mais efetivas e mostrar conhecimentos do React.
+- Adicionar opção para Excluir comentário (ou respostas à um comentario)
 - Adicionar Recuperação de senha para usuários.
 - Organização da Home:
   - Listar todas as notícias de modo que aproximadamente 12 delas sejam exibidas de uma vez, com opção de passar para as próximas.
