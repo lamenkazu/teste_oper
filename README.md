@@ -37,7 +37,7 @@ Todos os requisitos cumpridos:
 # Contras
 - Não consegui utilizar o GitHubPages corretamente com o NextJs
 - Falhas de responsividade no código nos comentários e na disponibilização de notícias na Home.
-- API Keys do Firebase Publicas
+- API Keys do Firebase Publicas (Sem utilização de um env.local ou algo do tipo, pois pretendia tentar liberar esse acesso para a GithubPage, e como ela já seria visível pelos commits anteriores, não optei por modificar isso. Pode usar essa mesma chave para testar o código, não há problema.)
 - As tipagens do typescript (Com Type ou Interface) deveriam ter sido alocadas em um único local e ser exportadas para onde fossem necessárias, porém elas estão nos arquivos que foram criadas pela primeira vez, tornando o código menos claro. Isso foi aplicado para outras coisas no código, mas isso é uma coisa que poderia ter sido melhor implementada.
 
 # Melhorias Possíveis/Futuras
