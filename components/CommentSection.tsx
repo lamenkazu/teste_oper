@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { SendComment } from '.'
-import { firestoreDb, getComments } from '@/utils/firebase/firestore';
+import { firestoreDb } from '@/utils/firebase/firestore';
 import {collection,  query, onSnapshot} from 'firebase/firestore'
 import { Comment } from '@/components'
 
@@ -23,8 +23,6 @@ export interface CommentWithId extends NewCommentType {
 
 const CommentSection = ({ postId }: PostIdProps) => {
 
-  const [allComments, setAllComments] = useState([])
-
   const [comments, setComments] = useState<CommentWithId[]>([]);
 
   useEffect(() => {
@@ -46,8 +44,6 @@ const CommentSection = ({ postId }: PostIdProps) => {
       unsubscribe();
     };
   }, [postId]);
-
-  console.log(comments)
 
   return (
     <section>

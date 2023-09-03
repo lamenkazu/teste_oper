@@ -1,9 +1,72 @@
 import Image from 'next/image'
 import { CommentWithId } from './CommentSection'
+import { useEffect, useState } from 'react'
+import { useFirebaseAuth } from '@/context/authContext';
+import { updateComment } from '@/utils/firebase/firestore';
+import { SendComment } from '.'
+
+
 
 const Comment = ({ comment }: { comment: CommentWithId }) => {
 
-  console.log(comment)
+
+  const user = useFirebaseAuth()
+
+  const [like, setLike] = useState(false)
+
+  const liked = like === true ? '/liked.png' : '/like.png'
+
+   /*
+  const chooseLikeStyle = () => {
+
+    const updatedLikes = [...comment.likes]
+
+    const userIndex = updatedLikes.indexOf(user.uid) //cria cópia do vetor para atualiziar
+
+
+    return ''
+  }*/
+
+  useEffect(() => {
+    if(user){
+      const updatedLikes = [...comment.likes]
+
+      const userIndex = updatedLikes.indexOf(user.uid) //cria cópia do vetor para atualiziar
+
+      if(userIndex === -1){
+        setLike(false)
+      }else{
+        setLike(true)
+      }
+    }
+    
+
+  }, [])
+
+  const [showAnswer, setShowAnswer] = useState(false)
+
+
+  const handleLike = () => {
+    if(user){
+
+      const updatedLikes = [...comment.likes]
+
+      const userIndex = updatedLikes.indexOf(user.uid) //cria cópia do vetor para atualiziar
+
+      if(userIndex === -1){
+        updatedLikes.push(user.uid) //insere se não estiver no vetor
+      }else{
+        updatedLikes.splice(userIndex, 1) //remove se ja estiver no vetor
+      }
+      
+      setLike(!like)
+      comment.likes = updatedLikes
+
+      updateComment(comment)
+    }
+    
+  }
+
   return (
     <section className='mt-3 flex flex-col justify-center items-center'>
       <div className='w-[1000px] p-3 rounded-md bg-opacity-20 border-2 border-primary-variant resize-none'>
@@ -29,18 +92,34 @@ const Comment = ({ comment }: { comment: CommentWithId }) => {
              {comment.createdAt}
           </p>
 
-          <p>
-          
-
-          </p>
-
           <div className='flex items-center'>
-          <Image src='/like.png' width={35} height={35} alt='Like Icon' onClick={() => {}}/>
-          <p>
-            {comment.likes.length}
-          </p>
+          
+            <p 
+              className='mr-3 hover:text-blue-800 
+              hover:underline hover:cursor-pointer'
+              onClick={() => setShowAnswer(!showAnswer)}>
+              Responder
+            </p>
+
+            <Image
+                className='hover:cursor-pointer'
+                src={liked} alt='Like Icon' 
+                width={35} height={35}  
+                onClick={handleLike}/>
+            <p>
+              {comment.likes.length}
+            </p>
           </div>
         </div>
+
+        {
+          showAnswer === true ? (
+            <SendComment postId={comment.postId} hasTitle={false}/>
+          ) : (
+            <></>
+          )
+          
+        }
 
       </div>
     </section>

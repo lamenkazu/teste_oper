@@ -17,7 +17,7 @@ interface PostIdProps {
   postId: string;
 }
 
-const SendComment = ({postId}: PostIdProps) => {
+const SendComment = ({ postId, hasTitle }: PostIdProps & { hasTitle?: boolean }) => {
 
     const [comment, setComment] = useState("")
 
@@ -54,11 +54,18 @@ const SendComment = ({postId}: PostIdProps) => {
 
   return (
     <div id="discover" className="mt-12 padding-x padding-y max-width">
-        <div className="home__text-container">
-            <h1 className="text-4xl font-extrabold">
-                Comentários
-            </h1>
-        </div>
+
+        {
+            hasTitle === true ? (
+                <div className="home__text-container">
+                    <h1 className="text-4xl font-extrabold">
+                        Comentários
+                    </h1>
+                </div>
+            ) : (<></>)
+        }
+        
+
         <div className="flex justify-center items-center mt-8">
             <input 
                 className='w-[1000px] p-3 rounded-md bg-opacity-20 border-2 border-primary-variant resize-none' 
