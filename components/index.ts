@@ -7,6 +7,8 @@ import CustomFilter from './CustomFilter'
 import NewsCard from './NewsCard'
 import NewsDetails from './NewsDetails'
 import CommentSection from './CommentSection'
+import SendComment from './SendComment'
+import Comment from './Comment'
 
 export {
     Hero,
@@ -17,5 +19,7 @@ export {
     CustomFilter,
     NewsCard,
     NewsDetails,
-    CommentSection
+    CommentSection,
+    SendComment,
+    Comment
 }

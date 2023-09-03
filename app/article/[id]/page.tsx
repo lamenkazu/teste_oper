@@ -35,7 +35,6 @@ export default function Article({params}:ParamProps){
 
   const user = useFirebaseAuth();
   
-  console.log(user?.email)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,8 +53,6 @@ export default function Article({params}:ParamProps){
     fetchData()
     
   }, [setUiState])
-
-  console.log(uiState)
 
     return(
       <>
@@ -114,7 +111,7 @@ export default function Article({params}:ParamProps){
 
         </div>
 
-        <CommentSection />
+        <CommentSection postId={params.id.toString()} />
 
         </main> 
 
