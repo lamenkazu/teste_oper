@@ -2,19 +2,7 @@
 import Image from "next/image";
 import dayjs from "dayjs";
 import Link from "next/link";
-
-//Tipagem de uma Notícia vinda da News API
-export interface NewsProps {
-  news: {
-    id: string;
-    title: string;
-    content: string;
-    author: string;
-    published: string;
-    coverImage: string;
-    tags: string[];
-  };
-}
+import { NewsProps } from "@/types";
 
 const NewCard = ({ news }: NewsProps) => {
   const { id, title, content, author, published, coverImage, tags } = news;

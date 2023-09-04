@@ -27,7 +27,6 @@ export default function Home() {
 
         setUiState(UI.Home); //Define o UIState para Home quando está nessa página
 
-        console.log(uiState);
       } catch (error) {
         console.error(error);
       }

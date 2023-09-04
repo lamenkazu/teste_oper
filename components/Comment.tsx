@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { NewCommentType } from "./CommentSection";
 import { useEffect, useState } from "react";
 import { useFirebaseAuth } from "@/context/authContext";
 import { updateComment } from "@/utils/firebase/firestore";
 import { SendAnswer, AnswerSection } from ".";
+import { NewCommentType } from "@/types";
 
 const Comment = ({ comment }: { comment: NewCommentType }) => {
   const user = useFirebaseAuth();
@@ -11,17 +11,6 @@ const Comment = ({ comment }: { comment: NewCommentType }) => {
   const [like, setLike] = useState(false);
 
   const liked = like === true ? "/liked.png" : "/like.png";
-
-  /*
-  const chooseLikeStyle = () => {
-
-    const updatedLikes = [...comment.likes]
-
-    const userIndex = updatedLikes.indexOf(user.uid) //cria cópia do vetor para atualiziar
-
-
-    return ''
-  }*/
 
   useEffect(() => {
     if (user) {

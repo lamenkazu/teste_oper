@@ -3,23 +3,7 @@ import { SendComment } from ".";
 import { firestoreDb } from "@/utils/firebase/firestore";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import { Comment } from "@/components";
-import { AnswerWithId } from "./AnswerSection";
-
-//Tipagem do parâmetro transmitodo pela pagina
-interface PostIdProps {
-  postId: string;
-}
-
-//Tipagem de um Novo Comentário
-export interface NewCommentType {
-  id?: string;
-  email: string | null;
-  comment: string;
-  postId: string;
-  createdAt: string;
-  likes: string[];
-  answers: AnswerWithId[];
-}
+import { NewCommentType, PostIdProps } from "@/types";
 
 const CommentSection = ({ postId }: PostIdProps) => {
   const [comments, setComments] = useState<NewCommentType[]>([]);

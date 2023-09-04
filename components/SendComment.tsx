@@ -3,22 +3,7 @@ import { CustomButton } from '.'
 import { useFirebaseAuth } from '@/context/authContext'
 import { addComment } from '@/utils/firebase/firestore'
 import dayjs from 'dayjs'
-import { NewAnsType } from './SendAnswer'
-
-
-export interface NewCommentType{
-    id?: string,
-    email: string | null, 
-    comment: string,
-    postId: string,
-    createdAt: string,
-    likes: string[],
-    answers: NewAnsType[],
-}
-
-interface PostIdProps {
-  postId: string;
-}
+import { NewCommentType, PostIdProps } from '@/types'
 
 const SendComment = ({ postId }: PostIdProps) => {
 

@@ -1,4 +1,5 @@
 "use client";
+import { UiStateContextType, UiStateProviderProps } from "@/types";
 import { useState, createContext, useContext, ReactNode } from "react";
 
 export enum UI {
@@ -7,15 +8,6 @@ export enum UI {
   SignIn,
   SignUp,
 }
-
-type UiStateContextType = {
-  uiState: UI;
-  setUiState: (uiState: UI) => void;
-};
-
-type UiStateProviderProps = {
-  children: ReactNode;
-};
 
 const UiStateContext = createContext<UiStateContextType | undefined>(undefined);
 

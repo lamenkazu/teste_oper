@@ -1,11 +1,7 @@
 import {addDoc, collection, getFirestore, doc, getDoc, getDocs, where, QuerySnapshot, onSnapshot, updateDoc} from 'firebase/firestore'
 import { app } from './firebase'
-import { useFirebaseAuth } from '@/context/authContext'
-import { getAuth } from 'firebase/auth'
-import { useState } from 'react'
-import { NewAnsType } from '@/components/SendAnswer'
-import { NewCommentType } from '@/components/CommentSection'
-import { AnswerWithId } from '@/components/AnswerSection'
+import { NewAnsType, NewCommentType } from '@/types'
+
 
 const firestoreDb = getFirestore(app)
 
@@ -28,7 +24,7 @@ const updateComment = async (newComment: NewCommentType) => {
 
 }
 
-const updateAnswer = async(answer: AnswerWithId) => {
+const updateAnswer = async(answer: NewAnsType) => {
 
     const commentRef = doc(firestoreDb, `post/${answer.postId}/comments/${answer.commentId}`)
 

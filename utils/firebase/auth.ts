@@ -1,10 +1,8 @@
+import { AuthProps } from "@/types";
 import { app } from "./firebase";
 import {signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, signOut} from 'firebase/auth'
 
-interface AuthProps {
-  email: string;
-  password: string;
-}
+
 
 const auth = getAuth(app);
 

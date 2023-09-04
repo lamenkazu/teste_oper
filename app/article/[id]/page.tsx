@@ -6,24 +6,8 @@ import dayjs from "dayjs";
 import { CommentSection, Navbar, Footer } from "@/components";
 import { useEffect, useState } from "react";
 import { UI, useUiState } from "@/context/UIStateContext";
+import { ArticleData, ParamProps } from "@/types";
 
-/**Propriedades do parâmetro recebido pela URL */
-interface ParamProps {
-  params: {
-    id: string;
-  };
-}
-
-/**Tipagem de um Artigo recebido pela News API */
-interface ArticleData {
-  id: string;
-  title: string;
-  content: string;
-  author: string;
-  published: string;
-  coverImage: string;
-  tags: string[];
-}
 
 export default function Article({ params }: ParamProps) {
   const { setUiState } = useUiState();

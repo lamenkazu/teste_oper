@@ -1,14 +1,10 @@
 import Image from "next/image";
-import { NewAnsType } from "./SendAnswer";
 import { useState, useEffect } from "react";
 import { useFirebaseAuth } from "@/context/authContext";
 import { updateAnswer } from "@/utils/firebase/firestore";
+import { NewAnsType } from "@/types";
 
-export interface AnswerWithId extends NewAnsType {
-  id: string;
-}
-
-const AnswerSection = ({ answer }: { answer: AnswerWithId }) => {
+const AnswerSection = ({ answer }: { answer: NewAnsType }) => {
   const user = useFirebaseAuth();
 
   const [like, setLike] = useState(false);

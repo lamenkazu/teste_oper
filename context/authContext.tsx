@@ -1,14 +1,8 @@
 "use client";
 import { createContext, useContext, useState, useEffect, ReactNode} from 'react';
 
-import firebase from "firebase/auth";
 import { auth } from "@/utils/firebase/auth";
-
-type User = firebase.User | null;
-type ContextState = { user: User };
-type AuthProviderProps = {
-  children: ReactNode;
-};
+import { AuthProviderProps, ContextState, User } from '@/types';
 
 const FirebaseAuthContext = createContext<ContextState | undefined>(undefined);
 

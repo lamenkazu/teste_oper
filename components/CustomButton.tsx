@@ -1,15 +1,7 @@
 //Componentes são Client Side
 "use client";
 
-import { MouseEventHandler } from "react";
-
-//Tipagem das Propriedades do Botão Customisável da aplicação.
-interface CustomButtonProps {
-  title: string;
-  containerStyles?: string;
-  handleClick?: MouseEventHandler<HTMLButtonElement>;
-  btnType?: "button" | "submit";
-}
+import { CustomButtonProps } from "@/types";
 
 const CustomButton = ({title, containerStyles, handleClick, btnType = "button"}:CustomButtonProps) => {
   return (

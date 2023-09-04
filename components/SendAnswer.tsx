@@ -3,25 +3,10 @@ import { useFirebaseAuth } from "@/context/authContext";
 import dayjs from "dayjs";
 
 import { CustomButton } from ".";
-import { NewCommentType } from "./CommentSection";
 import { updateComment } from "@/utils/firebase/firestore";
+import { CommentProps, NewAnsType } from "@/types";
 
-//Tipagem de uma resposta
-export interface NewAnsType {
-  id: string;
-  commentId: string | undefined;
-  email: string | null;
-  comment: string;
-  postId: string;
-  createdAt: string;
-  likes: string[];
-}
-
-interface CommentIdProps {
-  comment: NewCommentType;
-}
-
-const SendAnswer = ({ comment }: CommentIdProps) => {
+const SendAnswer = ({ comment }: CommentProps) => {
   const user = useFirebaseAuth();
 
   const [answer, setAnswer] = useState("");
